@@ -38,6 +38,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.annotation.VisibleForTesting
+import androidx.compose.ui.platform.testTag
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,6 +88,7 @@ fun TipTimeLayout() {
             modifier = Modifier
                 .padding(bottom = 32.dp)
                 .fillMaxWidth()
+                .testTag("billAmount")
         )
 
         EditNumberField(
@@ -95,6 +98,7 @@ fun TipTimeLayout() {
             modifier = Modifier
                 .padding(bottom=32.dp)
                 .fillMaxWidth()
+                .testTag("tipPercentage")
         )
 
         RoundTheTipRow(
@@ -113,8 +117,8 @@ fun TipTimeLayout() {
         Spacer(modifier = Modifier.height(150.dp))
     }
 }
-
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
     tipPercent: Double = 15.0,
     roundUp: Boolean = false
